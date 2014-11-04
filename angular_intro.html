@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angularjs/angular.js"></script>
+    <script>
+        // $scope --> model
+        // view --> html
+        // controller --> defined
+
+        var myApp = angular.module('myApp', []);
+
+        myApp.controller('MyController', function ($scope) {
+            $scope.person = {
+                name: 'Edwin Villanueva',
+                id: 32
+            };
+
+            var arr = [];
+            for (var i = 0, len = 100; i < len; i++) {
+                arr[i] = i + 1;
+            }
+
+            $scope.numbers = arr;
+
+            $scope.name = 'Ray Hengst';
+        });
+
+    </script>
+</head>
+<body>
+    <div data-ng-app="myApp">
+
+        <input type="text" ng-model="candidate"/>
+        <input type="text" ng-model="candidate"/>
+        <div>{{candidate}}</div>
+
+
+        <div data-ng-controller="MyController">
+            <div>{{name}}</div>
+            <div ng-bind="name"></div>
+            <div>
+                Hello from {{ person.name }}!!
+            </div>
+            <div>
+                Candidate is : {{candidate}}
+            </div>
+           <!-- <ul>
+                <li ng-repeat="num in numbers">
+                    {{ num }}
+                </li>
+            </ul>-->
+
+            <input type="text" ng-model="name"/>
+
+        </div>
+        <div ng-controller="DataController">
+            {{candidate}}
+        </div>
+    </div>
+</body>
+</html>

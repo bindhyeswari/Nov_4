@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // todo: (Mishra) Try doing something similar with CSS or SASS
+            // write code here for updation
+            var inp = document.getElementById('dirty_updates');
+            inp.oldval = '';
+            setInterval(function () {
+                inp.newval = inp.value;
+                if ( inp.newval !== inp.oldval ) {
+                    for (var i = 1, len = document.body.children.length; i < len; i++) {
+                        if ( typeof document.body.children[i].value !== 'undefined' ) document.body.children[i].value = inp.newval;
+                        else document.body.children[i].innerHTML = inp.newval;
+                    }
+                    inp.oldval = inp.newval;
+                }
+            }, 20);
+        });
+    </script>
+</head>
+<body>
+<input type="text" id="dirty_updates"/>
+<div></div>
+<input type="text"/>
+<span></span>
+</body>
+</html>
