@@ -5,15 +5,29 @@
     <meta charset="UTF-8">
     <script src="bower_components/angularjs/angular.js"></script>
     <script>
-        angular.module('raysapp', []).controller('RaysController', function ($scope, $http, $interval) {
-
-            $scope.name = 'asdf';
-
+        var raysapp = angular.module('raysapp', []);
+        raysapp
+        .controller('RaysController', function ($scope, $http, $interval) {
+            $scope.name = 'Ray Hengst';
             $http.get('http://uitr.herokuapp.com/countries').success(function (data) {
+                $scope.hashmap = {};
+                data.forEach(function (country) {
+                    $scope.hashmap[country.alpha3Code] = country.name;
+                });
+                console.log($scope.hashmap);
                 $scope.data = data;
-                console.log(data);
+                // console.log(data);
             });
-
+        })
+        .filter('reverse', function () {
+            return function (inp) {
+                return inp.split('').reverse().join('');
+            };
+        })
+        .filter('country', function () {
+            return function (inp, scope) {
+                return scope.hashmap[inp];
+            };
         });
     </script>
     <title>Countries</title>
@@ -22,8 +36,15 @@
 <input type="text" ng-model="search"/>
     <ul>
         <li ng-repeat="country in data | orderBy:'population' | filter:search ">
-            {{ country.name }} has a population of {{ country.population }} and its neighbors are:
-            <div>Neighbors here: </div>
+            {{ country.name }} has a population of {{ country.population }}
+            <div ng-show="country.borders.length">
+                Neighbors here:
+                <ul>
+                    <li ng-repeat="neighbor in country.borders">
+                        {{ neighbor | country:this }}
+                    </li>
+                </ul>
+            </div>
             <!--<div>{{ country }}</div>-->
         </li>
     </ul>
