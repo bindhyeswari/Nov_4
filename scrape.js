@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var td1 = tr.firstElementChild;
         var symbolh3 = tr.getElementsByClassName('symbol_links')[0].firstElementChild;
         var obj = {
-            name: td1.firstElementChild ? td1.firstElementChild.innerHTML : td1.innerHTML,
-            symbol: symbolh3.firstElementChild ? symbolh3.firstElementChild.innerHTML.trim() : symbolh3.innerHTML.trim(),
+            name: td1.textContent,
+            symbol: symbolh3.textContent.trim(),
             market_cap: tr.children[2].innerHTML === 'n/a' ?  null : tr.children[2].innerHTML,
             country: tr.children[4].innerHTML === 'n/a' ?  null : tr.children[4].innerHTML,
             ipo: tr.children[5].innerHTML === 'n/a' ?  null : tr.children[5].innerHTML,
@@ -24,3 +24,4 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(companies);
     console.log(JSON.stringify(companies));
 });
+

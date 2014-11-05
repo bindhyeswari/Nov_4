@@ -3,8 +3,40 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-</head>
-<body>
+    <link rel="stylesheet" href="base.css"/>
+    <script src="private.js"></script>
+    <script src="bower_components/angularjs/angular.js"></script>
+    <script>
+        angular.module('myApp', []).controller('MyController', function ($scope) {
+            $scope.data = data;
+        });
 
+    </script>
+</head>
+<body ng-app="myApp">
+    <button id="btn_data">Change Data</button>
+
+
+
+
+    <ul ng-controller="MyController">
+        <input  id="divx"  type="text" ng-model="sort_criteria"/>
+        <input type="text" placeholder="search for" ng-model="search"/>
+        <select ng-model="sort_criteria">
+            <option value="market_cap">Market Capital</option>
+            <option value="ipo">IPO</option>
+        </select>
+        <div style="font-weight: bold;" ng-bind="sort_criteria"></div>
+        <li ng-repeat="company in data | orderBy:sort_criteria | filter:search">
+
+            {{company.name}} <span ng-show="company.market_cap">has a market cap of {{company.market_cap}}</span>
+            <span ng-show="company.ipo"> and started off in (IPO) {{company.ipo}}</span>
+        </li>
+    </ul>
+    <script>
+        document.getElementById('btn_data').addEventListener('click', function () {
+            document.getElementById('divx').value = 'ipo';
+        });
+    </script>
 </body>
 </html>
