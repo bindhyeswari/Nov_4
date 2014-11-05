@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="edwinsapp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script>
+        angular.module('edwinsapp', []).controller('EdwinsController', function ($scope, $interval) {
+            $scope.time = (new Date()).getTime();
+            $interval(function () {
+                $scope.time = (new Date()).getTime();
+            }, 1000);
+
+            // $scope.$apply(function () {  // your code here  });
+        });
+    </script>
+</head>
+<body ng-controller="EdwinsController">
+<footer id="footer" ng-bind="time">
+</footer>
+</body>
+</html>
