@@ -3,21 +3,15 @@
 <link rel="stylesheet" href="base.css"/>
 <head lang="en">
     <meta charset="UTF-8">
-    <script src="bower_components/chartjs/Chart.js"></script>
-    <script src="bower_components/angularjs/angular.js"></script>
-    <script src="controllers/controllers.js"></script>
-    <script src="filters/filters.js"></script>
-    <script>
 
-        var raysapp = angular.module('raysapp', ['raysapp.filters', 'raysapp.controllers']);
-
-    </script>
     <title>Countries</title>
 </head>
 <body ng-controller="RaysController">
+<button ng-click="getCountryData()">Get Country Info</button>
+<canvas id="canvas" height="450" width="450"></canvas>
 <input type="text" ng-model="search"/>
     <ul>
-        <li ng-repeat="country in data | orderBy:'population' | filter:search ">
+        <li ng-repeat="country in data | orderBy:'population' | filter:search " ng-click="printCountry(country)" >
             {{ country.name }} has a population of {{ country.population }}
             <div ng-show="country.borders.length">
                 Neighbors here:
@@ -30,5 +24,15 @@
             <!--<div>{{ country }}</div>-->
         </li>
     </ul>
+<script src="bower_components/chartjs/Chart.js"></script>
+<script src="bower_components/angularjs/angular.js"></script>
+<script src="controllers/controllers.js"></script>
+<script src="filters/filters.js"></script>
+<script src="angular-chart.js"></script>
+<script>
+
+    var raysapp = angular.module('raysapp', ['raysapp.filters', 'raysapp.controllers']);
+
+</script>
 </body>
 </html>
