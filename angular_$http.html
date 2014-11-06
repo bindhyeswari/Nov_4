@@ -3,32 +3,14 @@
 <link rel="stylesheet" href="base.css"/>
 <head lang="en">
     <meta charset="UTF-8">
+    <script src="bower_components/chartjs/Chart.js"></script>
     <script src="bower_components/angularjs/angular.js"></script>
+    <script src="controllers/controllers.js"></script>
+    <script src="filters/filters.js"></script>
     <script>
-        var raysapp = angular.module('raysapp', []);
-        raysapp
-        .controller('RaysController', function ($scope, $http, $interval) {
-            $scope.name = 'Ray Hengst';
-            $http.get('http://uitr.herokuapp.com/countries').success(function (data) {
-                $scope.hashmap = {};
-                data.forEach(function (country) {
-                    $scope.hashmap[country.alpha3Code] = country.name;
-                });
-                console.log($scope.hashmap);
-                $scope.data = data;
-                // console.log(data);
-            });
-        })
-        .filter('reverse', function () {
-            return function (inp) {
-                return inp.split('').reverse().join('');
-            };
-        })
-        .filter('country', function () {
-            return function (inp, scope) {
-                return scope.hashmap[inp];
-            };
-        });
+
+        var raysapp = angular.module('raysapp', ['raysapp.filters', 'raysapp.controllers']);
+
     </script>
     <title>Countries</title>
 </head>
